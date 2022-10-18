@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parrot Game</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./reset.css" />
+  </head>
+
+  <body>
+    <div class="pagina-inteira">
+      <div class="header title">
+        <p width="540" height="63" style="font-size: 56px;">PARROT CARD GAME</p>
+      </div>
+      <!---fim header title-->
+      <div class="cards row-one">
+        <!---inicio card 1-->
+        <img
+          onclick="changeImage1()"
+          src="./images/cards.png"
+          alt="card"
+          id="cardtr1"
+        />
+        <!---final card 1-->
+        <img
+          onclick="changeImage2()"
+          id="cardtr2"
+          src="./images/cards.png"
+          alt="card"
+        />
+        <img id="cardtr3" src="./images/cards.png" alt="card" />
+        <img id="cardtr4" src="./images/cards.png" alt="card" />
+        <img id="cardtr5" src="./images/cards.png" alt="card" />
+        <img id="cardtr6" src="./images/cards.png" alt="card" />
+      </div>
+      <!---fim div cards row-one-->
+    </div>
+    <!---fim div pagina-inteira-->
+  </body>
+
+  <script src="./script.js"></script>
+</html>

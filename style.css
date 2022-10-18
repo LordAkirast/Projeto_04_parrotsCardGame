@@ -1,0 +1,78 @@
+.pagina-inteira {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .header {
+    width: 100%;
+    background-color: #eef9bf;
+    height: 108px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+  }
+  
+  .cards {
+    width: 872px;
+    height: 227px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  .cards img {
+    width: 117px;
+    height: 146px;
+  }
+  
+  /*ideia é a seguinte
+  simplesmente... você vai criar um input
+  que vai seguir a seguinte regra
+  se for 4 ele da display none nos outros aqui embaixo.
+  simplesmente isso. 
+  */
+  
+  #cardtr1 {
+  }
+  
+  #cardtr2 {
+  }
+  
+  #cardtr3 {
+  }
+  
+  #cardtr4 {
+  }
+  
+  #cardtr5 {
+  }
+  
+  #cardtr6 {
+  }
+  
+  #cardtr7 {
+  }
+  
+  #cardtr8 {
+  }
+  
+  #cardtr9 {
+  }
+  
+  #cardtr10 {
+  }
+  
+  #cardtr11 {
+  }
+  
+  #cardtr12 {
+  }
+  
+  #cardtr13 {
+  }
+  
+  #cardtr14 {
+  }
+  
