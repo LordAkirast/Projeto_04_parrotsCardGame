@@ -22,6 +22,20 @@
     justify-content: space-evenly;
   }
   
+  .cards-row-two {
+    width: 872px;
+    height: 227px;
+    background-color: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  .cards-row-two img {
+    width: 117px;
+    height: 146px;
+  }
+  
   .cards img {
     width: 117px;
     height: 146px;
