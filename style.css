@@ -1,92 +1,87 @@
 .pagina-inteira {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  background-color: #eef9bf;
+  height: 108px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.cards {
+  width: 100%;
+  height: 227px;
+  background-color: #eef9bf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards-row-two {
+  width: 100%;
+  height: 227px;
+  background-color: #eef9bf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards-row-two img {
+  width: 117px;
+  height: 146px;
+}
+
+.cards img {
+  width: 117px;
+  height: 146px;
+}
+
+.card {
+  content: url("./images/card.png");
+}
+
+.cleave.-bye {
+  content: url("./images/cleave.png");
+}
+
+.strike.-bye {
+  content: url("./images/strike.png");
+}
+
+.hemo.-bye {
+  content: url("./images/hemo.png");
+}
+
+.flamebarrier.-bye {
+  content: url("./images/flamebarrier.png");
+}
+
+.ironwave.-bye {
+  content: url("./images/ironwave.png");
+}
+
+.defend.-bye {
+  content: url("./images/defend.png");
+}
+
+.rampage.-bye {
+  content: url("./images/rampage.png");
+}
+
+.twinstrike.-bye {
+  content: url("./images/twinstrike.png");
+}
+
+@media (max-width: 335px) {
+  .cards.row-one {
     flex-direction: column;
-    align-items: center;
   }
-  
-  .header {
-    width: 100%;
-    background-color: #eef9bf;
-    height: 108px;
-    display: flex;
-    align-items: end;
-    justify-content: center;
-  }
-  
-  .cards {
-    width: 872px;
-    height: 227px;
-    background-color: red;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-  
   .cards-row-two {
-    width: 872px;
-    height: 227px;
-    background-color: yellow;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    flex-direction: column;
   }
-  
-  .cards-row-two img {
-    width: 117px;
-    height: 146px;
-  }
-  
-  .cards img {
-    width: 117px;
-    height: 146px;
-  }
-  
-  /*ideia é a seguinte
-  simplesmente... você vai criar um input
-  que vai seguir a seguinte regra
-  se for 4 ele da display none nos outros aqui embaixo.
-  simplesmente isso. 
-  */
-  
-  #cardtr1 {
-  }
-  
-  #cardtr2 {
-  }
-  
-  #cardtr3 {
-  }
-  
-  #cardtr4 {
-  }
-  
-  #cardtr5 {
-  }
-  
-  #cardtr6 {
-  }
-  
-  #cardtr7 {
-  }
-  
-  #cardtr8 {
-  }
-  
-  #cardtr9 {
-  }
-  
-  #cardtr10 {
-  }
-  
-  #cardtr11 {
-  }
-  
-  #cardtr12 {
-  }
-  
-  #cardtr13 {
-  }
-  
-  #cardtr14 {
-  }
-  
+}

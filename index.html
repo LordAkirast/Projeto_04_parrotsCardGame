@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Parrot Game</title>
+    <title>Luck Card Game</title>
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./reset.css" />
   </head>
@@ -11,102 +11,24 @@
   <body>
     <div class="pagina-inteira">
       <div class="header title">
-        <p width="540" height="63" style="font-size: 56px;">PARROT CARD GAME</p>
+        <p
+          id="titulo"
+          onclick="spire()"
+          width="540"
+          height="63"
+          style="font-size: 56px;"
+        >
+          LUCK CARD GAME
+        </p>
       </div>
       <!---fim header title-->
-      <div class="cards row-one">
+      <article class="cards row-one">
         <!---inicio card 1-->
-        <img
-          onclick="changeImage1()"
-          src="./images/cards.png"
-          alt="card"
-          id="cardtr1"
-        />
-        <!---final card 1-->
-        <img
-          onclick="changeImage2()"
-          id="cardtr2"
-          src="./images/cards.png"
-          alt="card"
-        />
-        <img
-          onclick="changeImage3()"
-          id="cardtr3"
-          src="./images/cards.png"
-          alt="card"
-        />
-        <img
-          onclick="changeImage4()"
-          id="cardtr4"
-          src="./images/cards.png"
-          alt="card"
-        />
-        <img
-          onclick="changeImage5()"
-          id="cardtr5"
-          src="./images/cards.png"
-          alt="card"
-        />
-        <img
-          onclick="changeImage6()"
-          id="cardtr6"
-          src="./images/cards.png"
-          alt="card"
-        />
-        <img
-          onclick="changeImage7()"
-          id="cardtr7"
-          src="./images/cards.png"
-          alt="card"
-        />
-      </div>
+      </article>
       <!---fim div cards row-one-->
-      <div class="cards-row-two" id="rowTwo">
+      <section class="cards-row-two" id="rowTwo">
         <!---inicio card 8-->
-        <img
-          onclick="changeImage8()"
-          src="./images/cards.png"
-          alt="card"
-          id="cardtr8"
-        />
-        <!---final card 8-->
-        <img
-          onclick="changeImage9()"
-          id="cardtr9"
-          src="./images/cards.png"
-          alt="card"
-        />
-        <img
-          onclick="changeImage10()"
-          id="cardtr10"
-          src="./images/cards.png"
-          alt="card"
-        />
-        <img
-          onclick="changeImage11()"
-          id="cardtr11"
-          src="./images/cards.png"
-          alt="card"
-        />
-        <img
-          onclick="changeImage12()"
-          id="cardtr12"
-          src="./images/cards.png"
-          alt="card"
-        />
-        <img
-          onclick="changeImage13()"
-          id="cardtr13"
-          src="./images/cards.png"
-          alt="card"
-        />
-        <img
-          onclick="changeImage14()"
-          id="cardtr14"
-          src="./images/cards.png"
-          alt="card"
-        />
-      </div>
+      </section>
       <!---fim div cards row-two-->
     </div>
     <!---fim div pagina-inteira-->

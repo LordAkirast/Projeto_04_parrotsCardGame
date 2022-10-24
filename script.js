@@ -3,6 +3,120 @@
 
 ///declaração de variaveis
 let cardQt = 0;
+let z = 0; //para o randomizador
+let round = 0;
+let imagemCarta = [
+  "cleave.png",
+  "strike.png",
+  "defend.png",
+  "flamebarrier.png",
+  "hemo.png",
+  "ironwave.png",
+  "rampage.png",
+  "twinstrike.png"
+];
+
+let imagemCartaPt1 = [];
+let imagemCartaPt2 = [];
+let ordemCarta = [];
+let choosed = [];
+let y = Math.floor(Math.random() * 8 + 0);
+
+let src = "";
+let elemento = document.querySelector("article");
+
+let elemento2 = document.querySelector("section");
+
+function comparador() {
+  return Math.random() - 0.5;
+}
+
+function randomizar() {
+  let half = cardQt / 2; //divide por 2 para duplicar as cartas
+  let c = 8; ///o c recebe 8 para quando retirar um da lista de cartas selecionadas, ele diminua tambem e o array n receba um valor q n existe
+  while (z < half) {
+    ordemCarta.push(imagemCarta[y]);
+    console.log("antes: " + imagemCarta);
+    console.log("deve retirar: " + imagemCarta[y]);
+    if (y === 0) {
+      y = y + 1;
+      imagemCartaPt1 = imagemCarta.slice(y);
+      imagemCartaPt2 = imagemCartaPt1;
+      imagemCarta = imagemCartaPt1;
+      console.log("Y = 0 depois: " + imagemCarta);
+    } else {
+      imagemCartaPt1 = imagemCarta.slice(0, y);
+      imagemCartaPt2 = imagemCarta.slice(y + 1);
+      imagemCarta = imagemCartaPt1.concat(imagemCartaPt2);
+      console.log("depois: " + imagemCarta);
+    }
+    c = c - 1;
+    y = Math.floor(Math.random() * c + 0);
+    z = z + 1;
+  }
+  ordemCarta = ordemCarta.concat(ordemCarta);
+  ordemCarta.sort(comparador);
+  console.log(ordemCarta);
+
+  for (let p in ordemCarta) {
+    src = ordemCarta[p];
+  }
+}
+
+function selectCards() {
+  randomizar();
+  for (let i = 0; i < cardQt; i++) {
+    if (i % 2 === 0) {
+      src = ordemCarta[i];
+      src = src.replace(".png", "");
+      elemento.innerHTML +=
+        '<img  id="teste" onclick="turn(this)" class="' +
+        src +
+        '"' +
+        'src="./images/cards.png" />';
+    } else {
+      src = ordemCarta[i];
+      src = src.replace(".png", "");
+      elemento2.innerHTML +=
+        '<img id="teste" onclick="turn(this)" class="' +
+        src +
+        '"' +
+        'src="./images/cards.png" />';
+    }
+  }
+}
+
+let win = 0;
+function turn(cartinha) {
+  round = round + 1;
+  choosed.push(cartinha.classList.value);
+  cartinha.classList.toggle("-bye");
+  cartinha.removeAttribute("onclick");
+  if (choosed[0] !== choosed[1] && choosed.length > 3) {
+    alert("você perdeu em " + round + " rodadas! recomeçar? 1 - Sim | 2 - Não");
+    let reload = prompt();
+    if (reload === "1") {
+      window.location.reload();
+    } else {
+      alert("LOSER");
+      window.location.replace("https://slaytheweb.cards/");
+    }
+  }
+  if (choosed.length === Number(cardQt)) {
+    document.querySelector("#titulo").innerHTML = "CLICK ME";
+    alert("Você ganhou em " + round + "rodadas! Recomeçar? 1 - Sim | 2 Não");
+    let reload = prompt();
+    if (reload === "1") {
+      window.location.reload();
+    } else {
+      alert("LOSER");
+    }
+  }
+}
+
+function spire() {
+  window.location.replace("https://slaytheweb.cards/");
+}
 
 ////verifica a qtd de cartas, se menor que 4 ou maior
 //q 14 fica em loopíng se impar também.
@@ -18,987 +132,6 @@ while (cardQt < 4 || cardQt > 14) {
     alert("Entre com um valor que seja par.");
     cardQt = 0;
   }
+  selectCards();
 }
-
-///aleatoriedade de cartas
-let cardOrder = Math.floor(Math.random() * 3);
-
-if (cardOrder == 1) {
-  document.getElementById("cardtr1").src = "./images/strike.png";
-}
-///funções para mudar a imagem ao clicar
-
-function changeImage1() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr1").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr1").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr1").src = "./images/cards.png";
-  }
-}
-
-function changeImage2() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr2").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr2").src = "./images/defend.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr2").src = "./images/cards.png";
-  }
-}
-
-function changeImage3() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr3").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr3").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr3").src = "./images/cards.png";
-  }
-}
-
-function changeImage4() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr4").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr4").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr4").src = "./images/cards.png";
-  }
-}
-
-function changeImage5() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr5").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr5").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr5").src = "./images/cards.png";
-  }
-}
-
-function changeImage6() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr6").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr6").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr6").src = "./images/cards.png";
-  }
-}
-
-function changeImage7() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr7").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr7").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr7").src = "./images/cards.png";
-  }
-}
-
-function changeImage8() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr8").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr8").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr8").src = "./images/cards.png";
-  }
-}
-
-function changeImage9() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr9").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr9").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr9").src = "./images/cards.png";
-  }
-}
-
-function changeImage10() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr10").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr10").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr10").src = "./images/cards.png";
-  }
-}
-
-function changeImage11() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr11").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr11").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr11").src = "./images/cards.png";
-  }
-}
-
-function changeImage12() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr12").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr12").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr12").src = "./images/cards.png";
-  }
-}
-
-function changeImage13() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr13").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr13").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr13").src = "./images/cards.png";
-  }
-}
-
-function changeImage14() {
-  ///se o src da carta for diferente dela padrão
-  if (
-    document.getElementById("cardtr14").src ==
-    "https://5c2qg3.csb.app/images/cards.png"
-  ) {
-    ///a imagem recebe outro src
-    document.getElementById("cardtr14").src = "./images/strike.png";
-  } else {
-    ///se ao clicar ela for diferente. então ela recebe o src padrão
-    document.getElementById("cardtr14").src = "./images/cards.png";
-  }
-}
-
-///mostra as cartas selecionadas pelo jogador
-///4 = 1,3 strike
-if (cardQt == 4) {
-  function changeImage1() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr1").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr1").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr1").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage2() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr2").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr2").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr2").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage3() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr3").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr3").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr3").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage4() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr4").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr4").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr4").src = "./images/cards.png";
-    }
-  }
-  document.getElementById("cardtr5").style.display = "none";
-  document.getElementById("cardtr6").style.display = "none";
-  document.getElementById("cardtr7").style.display = "none";
-  document.getElementById("rowTwo").style.display = "none";
-} else if (cardQt == 6) {
-  function changeImage1() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr1").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr1").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr1").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage2() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr2").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr2").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr2").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage3() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr3").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr3").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr3").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage4() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr4").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr4").src = "./images/cleave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr4").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage5() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr5").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr5").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr5").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage6() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr6").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr6").src = "./images/cleave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr6").src = "./images/cards.png";
-    }
-  }
-  document.getElementById("cardtr7").style.display = "none";
-  document.getElementById("rowTwo").style.display = "none";
-} else if (cardQt == 8) {
-  function changeImage1() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr1").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr1").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr1").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage2() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr2").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr2").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr2").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage3() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr3").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr3").src = "./images/ironwave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr3").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage4() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr4").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr4").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr4").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage5() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr5").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr5").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr5").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage6() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr6").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr6").src = "./images/cleave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr6").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage7() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr7").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr7").src = "./images/ironwave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr7").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage8() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr8").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr8").src = "./images/cleave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr8").src = "./images/cards.png";
-    }
-  }
-  document.getElementById("cardtr9").style.display = "none";
-  document.getElementById("cardtr10").style.display = "none";
-  document.getElementById("cardtr11").style.display = "none";
-  document.getElementById("cardtr12").style.display = "none";
-  document.getElementById("cardtr13").style.display = "none";
-  document.getElementById("cardtr14").style.display = "none";
-} else if (cardQt == 10) {
-  //c7,10| d8,2 |i6,4 |s1,3
-
-  function changeImage1() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr1").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr1").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr1").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage2() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr2").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr2").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr2").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage3() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr3").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr3").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr3").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage4() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr4").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr4").src = "./images/ironwave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr4").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage5() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr5").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr5").src = "./images/twinstrike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr5").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage6() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr6").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr6").src = "./images/twinstrike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr6").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage7() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr7").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr7").src = "./images/cleave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr7").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage8() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr8").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr8").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr8").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage9() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr9").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr9").src = "./images/ironwave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr9").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage10() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr10").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr10").src = "./images/cleave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr10").src = "./images/cards.png";
-    }
-  }
-
-  document.getElementById("cardtr11").style.display = "none";
-  document.getElementById("cardtr12").style.display = "none";
-  document.getElementById("cardtr13").style.display = "none";
-  document.getElementById("cardtr14").style.display = "none";
-} else if (cardQt == 12) {
-  function changeImage1() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr1").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr1").src = "./images/cleave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr1").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage2() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr2").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr2").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr2").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage3() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr3").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr3").src = "./images/ironwave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr3").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage4() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr4").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr4").src = "./images/twinstrike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr4").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage5() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr5").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr5").src = "./images/flamebarrier.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr5").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage6() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr6").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr6").src = "./images/twinstrike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr6").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage7() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr7").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr7").src = "./images/cleave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr7").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage8() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr8").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr8").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr8").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage9() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr9").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr9").src = "./images/ironwave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr9").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage10() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr10").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr10").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr10").src = "./images/cards.png";
-    }
-  }
-  function changeImage11() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr11").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr11").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr11").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage12() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr12").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr12").src = "./images/flamebarrier.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr12").src = "./images/cards.png";
-    }
-  }
-
-  document.getElementById("cardtr13").style.display = "none";
-  document.getElementById("cardtr14").style.display = "none";
-} else if (cardQt == 14) {
-  function changeImage1() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr1").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr1").src = "./images/cleave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr1").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage2() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr2").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr2").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr2").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage3() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr3").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr3").src = "./images/flamebarrier.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr3").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage4() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr4").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr4").src = "./images/strike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr4").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage5() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr5").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr5").src = "./images/cleave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr5").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage6() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr6").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr6").src = "./images/hemo.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr6").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage7() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr7").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr7").src = "./images/flamebarrier.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr7").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage8() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr8").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr8").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr8").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage9() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr9").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr9").src = "./images/ironwave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr9").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage10() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr10").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr10").src = "./images/hemo.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr10").src = "./images/cards.png";
-    }
-  }
-  function changeImage11() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr11").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr11").src = "./images/ironwave.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr11").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage12() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr12").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr12").src = "./images/defend.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr12").src = "./images/cards.png";
-    }
-  }
-  function changeImage13() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr13").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr13").src = "./images/twinstrike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr13").src = "./images/cards.png";
-    }
-  }
-
-  function changeImage14() {
-    ///se o src da carta for diferente dela padrão
-    if (
-      document.getElementById("cardtr14").src ==
-      "https://5c2qg3.csb.app/images/cards.png"
-    ) {
-      ///a imagem recebe outro src
-      document.getElementById("cardtr14").src = "./images/twinstrike.png";
-    } else {
-      ///se ao clicar ela for diferente. então ela recebe o src padrão
-      document.getElementById("cardtr14").src = "./images/cards.png";
-    }
-  }
-}
+///printa o que tá dentro do article
